@@ -1,14 +1,14 @@
 <template>
   <div v-for="(item, index) in outlines" :key="index" class="item-container">
-    <div class="item-outline-icons" @click="handlerIconClick">
+    <div class="item-outline-icons" @click="handlerIconClick(index)">
       <PDFIcons
-        v-if="item.items.length > 0 && !isExpand"
+        v-if="item.items.length > 0 && !isExpandArr[index]"
         type="arrowRight"
         :width="18"
         :height="18"
       ></PDFIcons>
       <PDFIcons
-        v-else-if="item.items.length > 0 && isExpand"
+        v-else-if="item.items.length > 0 && isExpandArr[index]"
         type="arrowDown"
         :width="18"
         :height="18"
@@ -17,7 +17,7 @@
     </div>
     <div class="item-title">
       <span @click="handlerTitleClick(item)">{{ item.title }}</span>
-      <div :class="isExpand ? [] : ['unExpand']">
+      <div :class="isExpandArr[index] ? [] : ['unExpand']">
         <out-line-item :outlines="item.items" @go-page="emits('goPage', $event)"></out-line-item>
       </div>
     </div>
@@ -29,11 +29,11 @@
   import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
   import PDFIcons from '@/components/PDFIcons.vue';
   import type { OutlineType } from '@/type';
-  defineProps({ outlines: Array as PropType<OutlineType[]> });
+  const props = defineProps({ outlines: Array as PropType<OutlineType[]> });
   const emits = defineEmits(['goPage']);
-  const isExpand = ref(false);
-  const handlerIconClick = () => {
-    isExpand.value = !isExpand.value;
+  const isExpandArr = ref(Array.from({ length: props?.outlines?.length }).fill(false));
+  const handlerIconClick = (index) => {
+    isExpandArr.value[index] = !isExpandArr.value[index];
   };
   const document: Ref<PDFDocumentProxy> = inject('document');
   const handlerTitleClick = async (item: OutlineType) => {
