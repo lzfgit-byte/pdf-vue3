@@ -2,7 +2,25 @@
 div {
   box-sizing: border-box;
 }
+@keyframes  asideWidth {
+  0%{
+    width: @pdf-aside-width;
+  }
+  100%{
+    width: 0;
+    min-width: 0;
+  }
+}
+@keyframes asideWidthBack {
+  0%{
+    width: 0;
+    min-width: 0;
 
+  }
+  100%{
+    width: @pdf-aside-width;
+  }
+}
 .pdf-viewer-container {
   width: 100%;
   height: 100%;
@@ -43,6 +61,7 @@ div {
       min-width: @pdf-aside-width;
       transition: all .3s ease-in-out;
       left: 0;
+      animation: asideWidthBack .3s linear forwards;
     }
     .pdf-main{
       width: 100%;
@@ -57,8 +76,7 @@ div {
       left: -@pdf-aside-width;
       //display: none;
       opacity: 0;
-      width: 0;
-      min-width: 0;
+      animation: asideWidth .3s linear forwards;
     }
   }
 }
