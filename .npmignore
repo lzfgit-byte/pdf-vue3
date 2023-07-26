@@ -1,0 +1,14 @@
+/public
+/src
+.eslintignore
+.eslintrc
+.gitignore
+.npmignore
+.prettierrc
+index.html
+pnpm-lock.yaml
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+/.idea
+.npmrc
