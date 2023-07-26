@@ -8,6 +8,20 @@
     "build:lib": "vite build && npm pack",
     "lib": "npm pack"
   },
+  "keywords": [
+    "pdf",
+    "pdfjs",
+    "pdf-dist",
+    "vue3",
+    "vite",
+    "less"
+  ],
+  "homepage": "https://github.com/lzfgit-byte/pdf-vue3",
+  "bugs": "https://github.com/lzfgit-byte/pdf-vue3/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lzfgit-byte/pdf-vue3"
+  },
   "dependencies": {
     "lodash": "^4.17.21",
     "vue": "^3.2.45",
