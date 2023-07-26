@@ -2,6 +2,7 @@
 div {
   box-sizing: border-box;
 }
+
 .pdf-viewer-container {
   width: 100%;
   height: 100%;
@@ -33,24 +34,31 @@ div {
     width: 100%;
     height: calc(100% - var(--pdf-head-height));
     display: flex;
+    position: relative;
     .pdf-aside{
-      width: var(--pdf-aside-width);
+      width: @pdf-aside-width;
+      position: relative;
       background-color: rgba(212, 212, 215, 1);
       will-change: width;
-      transition: width .3s ease-in-out;
+      min-width: @pdf-aside-width;
+      transition: all .3s ease-in-out;
+      left: 0;
     }
     .pdf-main{
-      width: calc(100% - var(--pdf-aside-width));
+      width: 100%;
       height: 100%;
       will-change: width;
       transition: width .3s ease-in-out;
       overflow: auto;
     }
   }
-  .pdf-expand{
+  .un-expand{
     .pdf-aside{
-      min-width: var(--pdf-aside-min-width);
+      left: -@pdf-aside-width;
+      //display: none;
+      opacity: 0;
+      width: 0;
+      min-width: 0;
     }
   }
-
 }

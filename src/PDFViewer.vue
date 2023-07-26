@@ -8,7 +8,7 @@
         @change-current-page="setCurrentPage"
       ></Header>
     </div>
-    <div class="pdf-bottom" :class="isExpandAsideClass ? ['pdf-expand'] : ['un-expand']">
+    <div class="pdf-bottom" :class="isExpandAside ? ['pdf-expand'] : ['un-expand']">
       <ProgressBar :progress="progress"></ProgressBar>
       <div class="pdf-aside">
         <Sidebar
@@ -55,9 +55,7 @@
   provide('document', document);
   provide('powerLang', props?.lang);
 
-  const { gap, isExpandAside, asideWidth, asideMinWidth, isExpandAsideClass } = usePDFState(
-    props as any
-  );
+  const { gap, isExpandAside } = usePDFState(props as any);
   defineExpose({
     setCurrentPage,
     getCurrentPage: () => currentPage.value,
@@ -68,8 +66,6 @@
 <style scoped lang="less">
   @import './style/viewer';
   .pdf-container {
-    --pdf-aside-width: v-bind(asideWidth);
-    --pdf-aside-min-width: v-bind(asideMinWidth);
     --pdf-head-height: 4%;
     --pdf-render-gap: v-bind(gap);
   }
