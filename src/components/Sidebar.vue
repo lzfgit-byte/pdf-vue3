@@ -10,10 +10,11 @@
         <PDFIcons :width="22" :height="22" type="thumb"></PDFIcons>
       </div>
       <div
+        v-show="outlines?.length > 0"
         class="icon-container"
         :title="powerLang['sideBar.outline']"
         :class="activeTab === 'menu' ? ['icon-container-active'] : []"
-        @click="activeTab = 'menu'"
+        @click="outlines?.length > 0 ? (activeTab = 'menu') : () => 1"
       >
         <PDFIcons :width="20" :height="20" type="menu"></PDFIcons>
       </div>
@@ -55,7 +56,7 @@
   const powerLang = inject('powerLang');
 
   const activeTab = ref('thumb');
-  watch(activeTab, (value, oldValue) => {
+  watch(activeTab, (value) => {
     if (value === 'thumb') {
       nextTick(() => {
         pdfThumbRef.value.setScrollTopByPage(props.currentPage);

@@ -15,7 +15,7 @@ GlobalWorkerOptions.workerSrc = PdfWorker;
 export default (props: PDFProp, emits: PDFViewerEmitsType) => {
   const totalPage = ref(1);
   const currentPage = ref(1);
-  const contains = ref<Ref<HTMLDivElement>[]>([]);
+  const contains = ref<Ref<HTMLDivElement[]>[]>([]);
   const _scale = ref(1);
   const scrollRef = ref();
   const pageS: PageType = shallowReactive({});
@@ -29,6 +29,9 @@ export default (props: PDFProp, emits: PDFViewerEmitsType) => {
     for (let i = 0; i < totalPage.value; i++) {
       // The page number to get. The first page is 1.
       const page: PDFPageProxy = await document.value.getPage(i + 1);
+      if (!(contains.value[i]?.value?.length && contains.value[i].value.length > 0)) {
+        return;
+      }
       const currentDiv: HTMLDivElement = contains.value[i].value[0];
       const viewport = page.getViewport({ scale: _scale.value });
       const height = viewport.height * PixelsPerInch.PDF_TO_CSS_UNITS;

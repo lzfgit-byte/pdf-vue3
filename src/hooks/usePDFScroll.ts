@@ -1,3 +1,4 @@
+import { watch } from 'vue';
 import type { Ref } from 'vue';
 import { debounce, keys } from 'lodash';
 import { EventBus, PDFPageView } from 'pdfjs-dist/web/pdf_viewer';
@@ -100,12 +101,16 @@ export default (
         emits('scroll');
         if (isScrollbarAtBottom()) {
           currentPage.value = totalPages;
-          emits('ended');
         }
         break;
       }
     }
   }, 200);
+  watch(currentPage, () => {
+    if (currentPage.value === totalPages) {
+      emits('ended');
+    }
+  });
   divRef.value.addEventListener('scroll', scrollHandler);
   return {};
 };
