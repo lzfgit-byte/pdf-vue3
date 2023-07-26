@@ -18,7 +18,6 @@
     "noImplicitAny": false,
     "noEmit": true,
     "types": [
-      "element-plus/global"
     ],
     "paths": {
       "@/*": [

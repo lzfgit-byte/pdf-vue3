@@ -14,11 +14,11 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'lib',
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'index',
       formats: ['es', 'umd'],
       // the proper extensions will be added
-      fileName: 'lib',
+      fileName: 'index',
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
