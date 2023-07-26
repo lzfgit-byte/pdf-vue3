@@ -1,0 +1,56 @@
+@import './values';
+div {
+  box-sizing: border-box;
+}
+.pdf-viewer-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: @main-bg-color;
+
+  .current-pdf-page-container {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin-bottom: var(--pdf-render-gap);
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+.pdf-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  .pdf-header{
+    position: relative;
+  }
+  .pdf-header {
+    height: var(--pdf-head-height);
+    min-height: 30px;
+  }
+  .pdf-bottom{
+    width: 100%;
+    height: calc(100% - var(--pdf-head-height));
+    display: flex;
+    .pdf-aside{
+      width: var(--pdf-aside-width);
+      background-color: rgba(212, 212, 215, 1);
+      will-change: width;
+      transition: width .3s ease-in-out;
+    }
+    .pdf-main{
+      width: calc(100% - var(--pdf-aside-width));
+      height: 100%;
+      will-change: width;
+      transition: width .3s ease-in-out;
+      overflow: auto;
+    }
+  }
+  .pdf-expand{
+    .pdf-aside{
+      min-width: var(--pdf-aside-min-width);
+    }
+  }
+
+}

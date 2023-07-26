@@ -1,0 +1,42 @@
+@import '../style/values';
+div {
+  box-sizing: border-box;
+}
+.pdf-header-container {
+  display: flex;
+  height: 100%;
+  border: 1px solid #ccc;
+  background-color: @main-bg-color-lighting;
+  width: 100%;
+  .header-left,
+  .header-mid,
+  .header-right {
+    width: calc(100% / 3);
+    height: 100%;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  .header-mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      outline: none;
+      width: 28px;
+      border: 1px solid #ccc;
+      text-align: center;
+      line-height: 20px;
+    }
+  }
+}
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: @main-bg-color;
+  }
+}

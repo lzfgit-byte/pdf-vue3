@@ -1,0 +1,43 @@
+@import '../style/values';
+div {
+  box-sizing: border-box;
+}
+@keyframes rotateAnimate {
+  0%{
+    rotate: 0deg;
+  }
+  100%{
+    rotate: 360deg;
+  }
+}
+.side-bar-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  .side-bar-top {
+    background-color: @main-bg-color-lighting;
+    width: 100%;
+    height: @side-bar-top-height;
+    max-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 2px;
+    .icon-container {
+      box-sizing: border-box;
+      display: flex;
+      height: auto;
+      align-items: center;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 1px;
+      &:hover{
+        background-color: @icon-hover-color;
+      }
+    }
+    .icon-container-active{
+      background-color: @icon-active-color !important;
+
+    }
+  }
+}
