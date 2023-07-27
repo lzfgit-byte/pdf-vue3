@@ -1,10 +1,9 @@
 {
   "name": "@ilzf/pdf-vue3",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@8.1.1",
   "main": "dist/index.mjs",
   "publishConfig": {
-
   },
   "scripts": {
     "dev": "vite --host",
