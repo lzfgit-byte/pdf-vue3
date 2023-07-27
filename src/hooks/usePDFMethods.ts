@@ -6,5 +6,6 @@ export default (elRef: Ref<PDFExpose>, props: PDFProp, opts: PDFOpts): PDFMethod
     setCurrentPage: (currPage) => elRef.value.setCurrentPage(currPage),
     getCurrentPage: () => elRef.value.getCurrentPage(),
     getTotal: () => elRef.value.getTotal(),
+    setScale: (scale) => elRef.value.setScale(scale),
   };
 };

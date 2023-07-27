@@ -1,6 +1,7 @@
 import { EventBus, PDFPageView } from 'pdfjs-dist/web/pdf_viewer';
 import type { PageType, PageTypeInfo } from '@/type';
 import { getMark, mark } from '@/hooks/usePDFRenderBoolFilter';
+import { doRenderPage } from '@/hooks/usePDFScroll';
 
 export default (pageViewers: PageType, totalPages: number) => {
   if (totalPages >= 4) {
@@ -10,18 +11,7 @@ export default (pageViewers: PageType, totalPages: number) => {
         return;
       }
       mark(+key - 1, true);
-      const bus = new EventBus();
-      const pageViewer: PDFPageView = new PDFPageView({
-        container: currentDiv,
-        eventBus: bus,
-        id: new Date().getTime(),
-        defaultViewport: viewport,
-        scale: _scale,
-      });
-      pageViewer.setPdfPage(page);
-      pageViewer.draw().then(() => {
-        console.log(`渲染第${key}页`);
-      });
+      doRenderPage(currentDiv, viewport, _scale, page, key);
     }
   }
 };

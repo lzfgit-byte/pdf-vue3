@@ -9,7 +9,7 @@
   import PDFViewer from '@/PDFViewer.vue';
 
   const [viewRef, props, methods] = usePDFViewer({
-    src: 'http://192.168.0.220:7000/power-file/download/1683316289011527682?type=byteStream&access_token=1084540c-b5ef-4a89-806e-e1f1ebe97ce9',
+    src: 'http://192.168.0.220:7000/power-file/download/1683316289011527682?type=byteStream&access_token=ce178e7a-ed73-462e-9759-8df853e3d909',
     onLoaded: () => {
       console.log('loaded');
     },

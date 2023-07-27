@@ -5,14 +5,9 @@ import { watch } from 'vue';
 import type { PDFProp, PDFViewerEmitsType, PageType, PageTypeInfo } from '@/type';
 import usePDFRenderBoolFilter, { getMark, mark } from '@/hooks/usePDFRenderBoolFilter';
 import usePDFStartRender from '@/hooks/usePDFStartRender';
-
-export const renderPageByPage = (_page: PageTypeInfo, key) => {
-  const { page, currentDiv, viewport, _scale }: PageTypeInfo = _page;
-  if (getMark(+key - 1)) {
-    return;
-  }
-  mark(+key - 1, true);
+export const doRenderPage = (currentDiv, viewport, _scale, page, key) => {
   const bus = new EventBus();
+  currentDiv.innerHTML = '';
   const pageViewer: PDFPageView = new PDFPageView({
     container: currentDiv,
     eventBus: bus,
@@ -24,6 +19,14 @@ export const renderPageByPage = (_page: PageTypeInfo, key) => {
   pageViewer.draw().then(() => {
     console.log(`渲染第${key}页`);
   });
+};
+export const renderPageByPage = (_page: PageTypeInfo, key) => {
+  const { page, currentDiv, viewport, _scale }: PageTypeInfo = _page;
+  if (getMark(+key - 1)) {
+    return;
+  }
+  mark(+key - 1, true);
+  doRenderPage(currentDiv, viewport, _scale, page, key);
 };
 
 export default (
@@ -42,18 +45,7 @@ export default (
       return;
     }
     mark(+key - 1, true);
-    const bus = new EventBus();
-    const pageViewer: PDFPageView = new PDFPageView({
-      container: currentDiv,
-      eventBus: bus,
-      id: new Date().getTime(),
-      defaultViewport: viewport,
-      scale: _scale,
-    });
-    pageViewer.setPdfPage(page);
-    pageViewer.draw().then(() => {
-      console.log(`渲染第${key}页`);
-    });
+    doRenderPage(currentDiv, viewport, _scale, page, key);
   };
   const renderNearby = (key) => {
     if (key > 5) {
@@ -89,6 +81,10 @@ export default (
     const divEl: HTMLDivElement = evt.target as any;
 
     const scrollTop = divEl.scrollTop;
+    if (scrollTop === 0) {
+      currentPage.value = 1;
+      return;
+    }
     const scrollHeight = divEl.scrollHeight;
     const clientHeight = divEl.clientHeight;
     const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
@@ -116,12 +112,19 @@ export default (
         break;
       }
     }
+    emits('scroll');
   }, 200);
-  watch(currentPage, () => {
+  const watchStop = watch(currentPage, () => {
     if (currentPage.value === totalPages) {
       emits('ended');
     }
   });
   divRef.value.addEventListener('scroll', scrollHandler);
-  return {};
+
+  const stop = () => {
+    divRef.value.removeEventListener('scroll', scrollHandler);
+    watchStop();
+  };
+
+  return { stop };
 };

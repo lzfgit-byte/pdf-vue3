@@ -14,7 +14,17 @@ export interface PageTypeInfo {
   _scale: number;
 }
 export type PageType = Record<number, PageTypeInfo>;
-export type PDFIconType = 'thumb' | 'menu' | 'sidebar' | 'loading' | 'arrowRight' | 'arrowDown';
+export type PDFIconType =
+  | 'thumb'
+  | 'menu'
+  | 'sidebar'
+  | 'loading'
+  | 'arrowRight'
+  | 'arrowDown'
+  | 'plus'
+  | 'minus'
+  | 'down'
+  | 'up';
 
 export interface PDFProp {
   src: string | URL | TypedArray | ArrayBuffer | DocumentInitParameters;
@@ -31,11 +41,13 @@ export interface PDFExpose {
   setCurrentPage: (page: number) => void;
   getCurrentPage: () => number;
   getTotal: () => number;
+  setScale: (scale: number) => void;
 }
 export interface PDFMethods {
   setCurrentPage: (page: number) => void;
   getCurrentPage: () => number;
   getTotal: () => number;
+  setScale: (scale: number) => void;
 }
 export interface OutlineType {
   dest: [{ num: number; gen: number }, { name: string }];

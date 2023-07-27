@@ -94,6 +94,69 @@
       p-id="4252"
     ></path>
   </svg>
+  <svg
+    v-if="type === 'plus'"
+    t="1690440646794"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="2294"
+    :width="width"
+    :height="height"
+  >
+    <path
+      d="M512 512V170.666667h42.666667v341.333333h341.333333v42.666667h-341.333333v341.333333h-42.666667v-341.333333H170.666667v-42.666667h341.333333z"
+      fill="#444444"
+      p-id="2295"
+    ></path>
+  </svg>
+  <svg
+    v-if="type === 'minus'"
+    t="1690440710341"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="3267"
+    :width="width"
+    :height="height"
+  >
+    <path d="M128 512h768v46.933333H128z" fill="#444444" p-id="3268"></path>
+  </svg>
+  <svg
+    v-if="type === 'down'"
+    t="1690447537864"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="6038"
+    :width="width"
+    :height="height"
+  >
+    <path
+      d="M972.384 272.064a27.584 27.584 0 0 0-38.976 0L512 693.472 90.592 272.064A27.584 27.584 0 0 0 51.616 311.04l440.896 440.896a27.52 27.52 0 0 0 38.976 0L972.384 311.04a27.584 27.584 0 0 0 0-38.976z"
+      fill=""
+      p-id="6039"
+    ></path>
+  </svg>
+  <svg
+    v-if="type === 'up'"
+    t="1690447828000"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="7028"
+    :width="width"
+    :height="height"
+  >
+    <path
+      d="M966.4 668.8l-435.2-432c-9.6-9.6-25.6-9.6-35.2 0l-441.6 432c-9.6 9.6-9.6 25.6 0 35.2 9.6 9.6 25.6 9.6 35.2 0l425.6-416 416 416c9.6 9.6 25.6 9.6 35.2 0S976 678.4 966.4 668.8z"
+      p-id="7029"
+    ></path>
+  </svg>
 </template>
 <script setup lang="ts">
   import type { PropType } from 'vue';

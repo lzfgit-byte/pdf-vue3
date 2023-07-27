@@ -24,7 +24,7 @@
         <div ref="scrollRef" class="pdf-viewer-container">
           <div v-for="(item, index) in contains" :key="index" class="current-pdf-page-container">
             <div :ref="item" style="position: relative"></div>
-            <div style="position: absolute; bottom: 2px">{{ index + 1 }}</div>
+            <div v-show="isPageSDown" style="position: absolute; bottom: 2px">{{ index + 1 }}</div>
           </div>
         </div>
       </div>
@@ -53,6 +53,7 @@
     totalPage,
     progress,
     setCurrentPage,
+    setScale,
     pageS,
     isPageSDown,
     outlines,
@@ -66,6 +67,7 @@
     setCurrentPage,
     getCurrentPage: () => currentPage.value,
     getTotal: () => totalPage.value,
+    setScale: (scale: number) => setScale(scale),
   });
 </script>
 

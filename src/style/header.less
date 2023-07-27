@@ -17,17 +17,50 @@ div {
   .header-left {
     display: flex;
     align-items: center;
+    justify-content: start;
+    .page-total-container{
+      padding-left: 20px;
+      input {
+        outline: none;
+        width: 28px;
+        border: 1px solid #ccc;
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+
   }
   .header-mid {
+    //头中部
     display: flex;
     justify-content: center;
     align-items: center;
-    input {
-      outline: none;
-      width: 28px;
-      border: 1px solid #ccc;
-      text-align: center;
-      line-height: 20px;
+    .scalar-container{
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      .scalar-down-up{
+        display: flex;
+        gap: 2px;
+      }
+      .scalar-select{
+        width: 100px;
+        position: relative;
+        select{
+          width: 100%;
+          outline: none;
+          height: 20px;
+        }
+        .select-hover{
+          width: 100%;
+          background-color: @main-bg-color;
+          height: 22px;
+          position: absolute;
+          pointer-events: none;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
     }
   }
 }
