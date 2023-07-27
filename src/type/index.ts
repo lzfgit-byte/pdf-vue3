@@ -20,6 +20,7 @@ export interface PDFProp {
   src: string | URL | TypedArray | ArrayBuffer | DocumentInitParameters;
   gap?: number;
   lang?: Record<string, any>;
+  findPage?: number; // 大pdf时查找范围
   onLoaded?: () => void;
   onEnded?: () => void;
   onProgress?: (progress: number) => void;

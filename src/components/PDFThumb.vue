@@ -31,6 +31,7 @@
     isPageSDown: Boolean,
     currentPage: { type: Number, default: 1 },
     sidebarScrollWidth: Number,
+    findPage: Number,
   });
   const emits = defineEmits(['update:currentPage']);
   const keysC = computed(() => keys(props.pageS).length);
@@ -103,6 +104,7 @@
       const elDiv: HTMLDivElement = divRef.value[i].value[0];
       const parentDiv: HTMLDivElement = thumbContainerRef.value;
       const { scrollHeight, clientHeight } = parentDiv;
+      // 滚动条宽度，会影响图片宽度计算
       const scrollWidth = scrollHeight === clientHeight ? props.sidebarScrollWidth : 0;
       const { page, _scale }: PageTypeInfo = curPage;
       //
@@ -137,9 +139,20 @@
   };
 
   const handlerScroll = debounce(() => {
-    const scrollTop = thumbContainerRef.value.scrollTop;
     const divsKey = keys(divS);
-    for (let i = 0; i < divsKey.length; i++) {
+    const totalPages = divsKey.length;
+    const scrollTop = thumbContainerRef.value.scrollTop;
+    const scrollHeight = thumbContainerRef.value.scrollHeight;
+    const clientHeight = thumbContainerRef.value.clientHeight;
+    const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
+    const percentageRange = props.findPage / totalPages > 1 ? 1 : props.findPage / totalPages;
+    const rangeKey = [
+      (scrollPercentage - percentageRange > 0 ? scrollPercentage - percentageRange : 0) *
+        totalPages,
+      (scrollPercentage + percentageRange < 1 ? scrollPercentage + percentageRange : 1) *
+        totalPages,
+    ];
+    for (let i = Math.floor(rangeKey[0]); i < Math.floor(rangeKey[1]); i++) {
       const curDiv = divS[i + 1];
       const { bottomHeight, topHeight, curPage } = curDiv;
       if (scrollTop >= topHeight && scrollTop < bottomHeight) {

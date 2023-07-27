@@ -1,8 +1,8 @@
-import { watch } from 'vue';
 import type { Ref } from 'vue';
 import { debounce, keys } from 'lodash';
 import { EventBus, PDFPageView } from 'pdfjs-dist/web/pdf_viewer';
-import type { PDFViewerEmitsType, PageType, PageTypeInfo } from '@/type';
+import { watch } from 'vue';
+import type { PDFProp, PDFViewerEmitsType, PageType, PageTypeInfo } from '@/type';
 import usePDFRenderBoolFilter, { getMark, mark } from '@/hooks/usePDFRenderBoolFilter';
 import usePDFStartRender from '@/hooks/usePDFStartRender';
 
@@ -30,7 +30,8 @@ export default (
   divRef: Ref<HTMLDivElement>,
   pageViewers: PageType,
   currentPage: Ref<number>,
-  emits: PDFViewerEmitsType
+  emits: PDFViewerEmitsType,
+  props: PDFProp
 ) => {
   const objKeys = keys(pageViewers);
   const totalPages = objKeys.length;
@@ -88,7 +89,17 @@ export default (
     const divEl: HTMLDivElement = evt.target as any;
 
     const scrollTop = divEl.scrollTop;
-    for (let i = 0; i < objKeys.length; i++) {
+    const scrollHeight = divEl.scrollHeight;
+    const clientHeight = divEl.clientHeight;
+    const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
+    const percentageRange = props.findPage / totalPages > 1 ? 1 : props.findPage / totalPages;
+    const rangeKey = [
+      (scrollPercentage - percentageRange > 0 ? scrollPercentage - percentageRange : 0) *
+        totalPages,
+      (scrollPercentage + percentageRange < 1 ? scrollPercentage + percentageRange : 1) *
+        totalPages,
+    ];
+    for (let i = Math.floor(rangeKey[0]); i < Math.floor(rangeKey[1]); i++) {
       const key = objKeys[i];
       const { page, bottomHeight, topHeight, currentDiv, viewport, _scale }: PageTypeInfo =
         pageViewers[key];

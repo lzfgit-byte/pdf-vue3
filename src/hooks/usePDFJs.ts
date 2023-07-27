@@ -48,7 +48,7 @@ export default (props: PDFProp, emits: PDFViewerEmitsType) => {
     }
     isPageSDown.value = true;
     emits('loaded');
-    usePDFScroll(scrollRef, pageS, currentPage, emits);
+    usePDFScroll(scrollRef, pageS, currentPage, emits, props);
   };
   const loadDoc = async () => {
     const loadingTask: PDFDocumentLoadingTask = getDocument(props.src);
@@ -77,7 +77,7 @@ export default (props: PDFProp, emits: PDFViewerEmitsType) => {
   const setCurrentPage = (currentPage: number) => {
     const page = pageS[currentPage];
     renderPageByPage(page, currentPage);
-    page.currentDiv.scrollIntoView({ block: 'center' });
+    page.currentDiv.scrollIntoView({ block: 'center', behavior: 'smooth' });
   };
 
   return {

@@ -48,9 +48,11 @@
     isPageSDown: Boolean,
     currentPage: { type: Number, default: 1 },
     outlines: Array as PropType<OutlineType[]>,
+    findPage: Number,
   });
   const emits = defineEmits(['update:currentPage']);
   const sidebarScrollWidth = ref(8);
+  // 滚动条样式
   const sidebarScrollWidthComp = computed(() => `${sidebarScrollWidth.value}px`);
   const pdfThumbRef = ref<PDFThumbExpose>();
   const powerLang = inject('powerLang');

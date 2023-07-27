@@ -16,6 +16,7 @@
           :page-s="pageS"
           :is-page-s-down="isPageSDown"
           :outlines="outlines"
+          :find-page="findPage"
           @update:current-page="setCurrentPage"
         ></Sidebar>
       </div>
@@ -38,7 +39,12 @@
   import Header from '@/components/Header.vue';
   import usePDFState from '@/hooks/usePDFState';
   import { PDFViewerEmits } from '@/const/emits';
-  const props = defineProps({ src: String, gap: { type: Number, default: 6 }, lang: Object });
+  const props = defineProps({
+    src: String,
+    gap: { type: Number, default: 6 },
+    lang: Object,
+    findPage: { type: Number, default: 50 },
+  });
   const emits = defineEmits([...PDFViewerEmits]);
   const {
     contains,
