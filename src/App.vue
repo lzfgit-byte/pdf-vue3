@@ -9,7 +9,7 @@
   import PDFViewer from '@/PDFViewer.vue';
 
   const [viewRef, props, methods] = usePDFViewer({
-    src: 'http://192.168.0.220:7000/power-file/download/1683316289011527682?type=byteStream&access_token=ce178e7a-ed73-462e-9759-8df853e3d909',
+    src: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
     onLoaded: () => {
       console.log('loaded');
     },
